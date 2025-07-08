@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lightweight Checker</n  >
+  <style>
+    body { font-family: Arial, sans-serif; padding: 1em; max-width: 400px; margin: auto; }
+    input, button { width: 100%; padding: 0.75em; margin: 0.5em 0; font-size: 1em; }
+    #output { padding: 0.75em; margin-top: 1em; border: 1px solid #ddd; min-height: 2em; }
+  </style>
+</head>
+<body>
+  <h1>Command Checker</h1>
+  <input type="text" id="userInput" placeholder="Enter command key...">
+  <button id="checkBtn">Check</button>
+  <div id="output"></div>
+
+  <script>
+    // Hard-coded mapping dictionary
+    const mapping = {
+      "apple": "open box a",
+      "banana": "open box b",
+      "cherry": "open box c",
+      "date": "open box d"
+      // add more key-value pairs as needed
+    };
+
+    // Grab elements
+    const inputEl = document.getElementById('userInput');
+    const btn = document.getElementById('checkBtn');
+    const outputEl = document.getElementById('output');
+
+    // Event listener for button click
+    btn.addEventListener('click', () => {
+      const key = inputEl.value.trim().toLowerCase();
+      const result = mapping[key];
+      outputEl.textContent = result ? result : 'Unknown key';
+    });
+
+    // Optional: allow Enter key to trigger check
+    inputEl.addEventListener('keypress', e => {
+      if (e.key === 'Enter') btn.click();
+    });
+  </script>
+</body>
+</html>
