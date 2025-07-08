@@ -1,58 +1,255 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lightweight Checker</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escape Room Puzzle</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 1em;
-      max-width: 400px;
-      margin: auto;
-    }
-    input,
-    button {
-      width: 100%;
-      padding: 0.75em;
-      margin: 0.5em 0;
-      font-size: 1em;
-    }
-    #output {
-      padding: 0.75em;
-      margin-top: 1em;
-      border: 1px solid #ddd;
-      min-height: 2em;
-    }
-  </style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .puzzle-header {
+            margin-bottom: 25px;
+        }
+
+        .puzzle-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4a5568;
+            margin-bottom: 10px;
+        }
+
+        .puzzle-level {
+            font-size: 14px;
+            color: #718096;
+            background: #e2e8f0;
+            padding: 5px 15px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .puzzle-content {
+            margin-bottom: 25px;
+        }
+
+        .clue-text {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #2d3748;
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            margin-bottom: 20px;
+        }
+
+        .input-section {
+            margin-bottom: 20px;
+        }
+
+        .answer-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+            margin-bottom: 15px;
+        }
+
+        .answer-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .message {
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .message.show {
+            opacity: 1;
+        }
+
+        .success {
+            background: #c6f6d5;
+            color: #22543d;
+            border: 1px solid #9ae6b4;
+        }
+
+        .error {
+            background: #fed7d7;
+            color: #822727;
+            border: 1px solid #feb2b2;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .puzzle-title {
+                font-size: 20px;
+            }
+            
+            .clue-text {
+                font-size: 14px;
+                padding: 15px;
+            }
+            
+            .answer-input {
+                padding: 12px;
+                font-size: 16px;
+            }
+            
+            .submit-btn {
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Command Checker</h1>
-  <input type="text" id="userInput" placeholder="Enter command key..." />
-  <button id="checkBtn">Check</button>
-  <div id="output"></div>
+    <div class="container">
+        <div class="puzzle-header">
+            <h1 class="puzzle-title">N.O.A.H<br>Chat Assistant</h1>
+        </div>
+        
+        <div class="puzzle-content">
+            <div class="input-section">
+                <input type="text" id="answer" class="answer-input" placeholder="Enter your answer..." autocomplete="off">
+                <button class="submit-btn" onclick="checkAnswer()">Submit Answer</button>
+            </div>
+            
+            <div class="message" id="message"></div>
+        </div>
+    </div>
 
-  <script>
-    const mapping = {
-      apple: "open box a",
-      banana: "open box b",
-      cherry: "open box c",
-      date: "open box d"
-    };
+    <script>
+        // Define puzzle dictionary with answers and their responses
+        const puzzleDict = {
+            "keyboard": "Open box 23",
+            "footsteps": "Check under the red chair",
+            "fire": "Look behind the painting",
+            "mirror": "The key is in the flower pot",
+            "shadow": "Open drawer 15",
+            "candle": "Check the bookshelf second row",
+            "echo": "Password is 4829",
+            "breath": "Open the blue cabinet"
+        };
 
-    const inputEl = document.getElementById("userInput");
-    const btn = document.getElementById("checkBtn");
-    const outputEl = document.getElementById("output");
+        function showMessage(text, type) {
+            const messageEl = document.getElementById('message');
+            messageEl.textContent = text;
+            messageEl.className = `message ${type} show`;
+            
+            setTimeout(() => {
+                messageEl.classList.remove('show');
+            }, 3000);
+        }
 
-    btn.addEventListener("click", () => {
-      const key = inputEl.value.trim().toLowerCase();
-      outputEl.textContent = mapping[key] || "Unknown key";
-    });
+        function updateProgress() {
+            // No longer needed - removed progression system
+        }
 
-    inputEl.addEventListener("keypress", (e) => {
-      if (e.key === "Enter") btn.click();
-    });
-  </script>
+        function loadPuzzle() {
+            document.getElementById('answer').value = '';
+        }
+
+        function checkAnswer() {
+            const userAnswer = document.getElementById('answer').value.trim().toLowerCase();
+            
+            if (userAnswer === '') {
+                showMessage('Please enter an answer!', 'error');
+                return;
+            }
+            
+            // Check if answer exists in puzzle dictionary
+            if (puzzleDict.hasOwnProperty(userAnswer)) {
+                const response = puzzleDict[userAnswer];
+                showMessage(response, 'success');
+                document.getElementById('answer').value = ''; // Clear input after successful answer
+            } else {
+                showMessage('Answer not recognized. Try again!', 'error');
+            }
+        }
+
+        // Allow Enter key to submit
+        document.getElementById('answer').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkAnswer();
+            }
+        });
+
+        // Initialize the interface
+        loadPuzzle();
+    </script>
 </body>
 </html>
