@@ -195,28 +195,28 @@
     <script>
         // Define puzzle dictionary with answers and their responses
         const puzzleDict = {
-            "fauna": "Well done, animal expert! You've cracked the forest's secret. Open letter 7 to continue your journey.",
-            "eric": "Ah nuts! You figured it out! Eric would be proud. Proceed to letter 3 for your next challenge.",
-            "secrets": "Shh... you've unlocked the mystery! The shadows whisper: open letter 9 to discover what lies ahead.",
-            "home": "You cracked my riddle! Your next puzzle hopefully is harder and it's behind letter 5.",
-            "voyage": "Bon voyage, brave explorer! Your travels have led you here. Set sail towards letter 6 for your next adventure.",
-            "rainbow": "You've found the pot of gold at the end of the rainbow! The colors have spoken - letter 1 and 11 and 21 holds your next clue.",
-            "seven": "Craps! Looks like your luck ran out. Go ahead and open letter 12 and throw away letter 33.",
-            "not seven": "Hot shooter! You get to keep rolling but in the meantime letter 12 is calling your name",
-            "612743": "Numbers don't lie, and neither do you! This sequence has unlocked your path. March forward to letter 15.",
-            "prosperity": "Pung! Fortune favors the bold, and you've struck gold! Your wealth of knowledge leads to letter 18.",
-            "forage": "You've gathered the clues like a skilled hunter! Your search has borne fruit. Venture to letter 19.",
-            "full house": "You've got all the cards in your favor! This winning hand points you toward letter 20.",
-            "kcwxmc": "The puzzle  has been cracked! These mysterious letters have revealed their purpose. Multiple paths await: letters 4, 22, and 28 are all yours to explore.",
+            "fauna": "Well done, animal expert! You've cracked the forest's secret. Open envelope 7 to continue your journey.",
+            "eric": "Ah nuts! You figured it out! Eric would be proud. Proceed to envelope 3 for your next challenge.",
+            "secrets": "Shh... you've unlocked the mystery! The shadows whisper: open envelope 9 to discover what lies ahead.",
+            "home": "You cracked my riddle! Your next puzzle hopefully is harder and it's behind envelope 5.",
+            "voyage": "Bon voyage, brave explorer! Your travels have led you here. Set sail towards envelope 6 for your next adventure.",
+            "ra1nbows": "You've found the pot of gold at the end of the rainbow! The colors have spoken - envelope 1 and 11 and 21 holds your next clue.",
+            "seven": "Craps! Looks like your luck ran out. Go ahead and open envelope 12 and throw away envelope 33.",
+            "not seven": "Hot shooter! You get to keep rolling but in the meantime envelope 12 is calling your name",
+            "612743": "Numbers don't lie, and neither do you! This sequence has unlocked your path. March forward to envelope 15.",
+            "prosperity": "Pung! Fortune favors the bold, and you've struck gold! Your wealth of knowledge leads to envelope 18.",
+            "forage": "You've gathered the clues like a skilled hunter! Your search has borne fruit. Venture to envelope 19.",
+            "full house": "You've got all the cards in your favor! This winning hand points you toward envelope 20.",
+            "kcwxmc": "The puzzle  has been cracked! These mysterious envelopes have revealed their purpose. Multiple paths await: envelopes 4, 22, and 28 are all yours to explore.",
             "breath": "Take a deep breath - you've earned it! Fresh air fills your lungs as you move to the next stage.",
-            "15": "You take a deep breath and you walk through the door its the morning of your very first day. You now see letter 6.",
-            "30": "Who doesn't weigh everything all together? What a dummy bunny. Proceed to letter 5.",
-            "box b": "B is for brilliant, which describes your solution perfectly! The box yields its secrets. Open letter 1",
-            "knight, queen": "Checkmate! A royal combination worthy of chess masters! The grandmaster may open letter 2",
-            "bunny": "Hop to it! Like a clever rabbit, you've found the hidden path through the warren that leads to letter 4.",
-            "together": "Ah so the pen does work... Who knew. Oh you can open letter 3 now :D",
-            "4ever": "What magnetic attraction! Inseparable some might say. Go ahead and open letter 7.",
-            "wymm": "You found me! I am back home in box 0123 in the main room! I also picked up some friends along the way I hope you don't mind. They said they wanted to party with us on the ark as if it's your last!"
+            "15": "You take a deep breath and you walk through the door its the morning of your very first day. You now see envelope 6.",
+            "30": "Who doesn't weigh everything all together? What a dummy bunny. Proceed to envelope 5.",
+            "box b": "B is for brilliant, which describes your solution perfectly! The box yields its secrets. Open envelope 1",
+            "knight, queen": "Checkmate! A royal combination worthy of chess masters! The grandmaster may open envelope 2",
+            "bunny": "Hop to it! Like a clever rabbit, you've found the hidden path through the warren that leads to envelope 4.",
+            "together": "Ah so the pen does work... Who knew. Oh you can open envelope 3 now :D",
+            "4ever": "What magnetic attraction! Inseparable some might say. Go ahead and open envelope 7.",
+            "wymm": "You found me! I am back home in bag 0123 in the main room! I also picked up some friends along the way I hope you don't mind. They said they wanted to party with us on the ark as if it's your last!"
         };
 
         function showMessage(text, type) {
@@ -224,9 +224,9 @@
             messageEl.textContent = text;
             messageEl.className = `message ${type} show`;
             
-            setTimeout(() => {
-                messageEl.classList.remove('show');
-            }, 8000);
+            // setTimeout(() => {
+            //     messageEl.classList.remove('show');
+            // }, 8000);
         }
 
         function updateProgress() {
